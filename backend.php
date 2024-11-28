@@ -9,7 +9,7 @@ $city = $_POST['city'];
 $gender = $_POST['g'];
 
 $q = "INSERT INTO `users`( `name`, `email`, `password`, `contact`, `city`, `gender`) 
-VALUES ('$name','$email','$pass','$city','$contact','$gender')";
+VALUES ('$name','$email','$pass','$contact','$city','$gender')";
 $sql = mysqli_query($conn, $q);
 if ($sql) {
     echo 'Data inserted';

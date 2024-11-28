@@ -1,3 +1,8 @@
+<?php
+$conn = mysqli_connect('localhost', 'root', '', 'ajaxCrud');
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -15,43 +20,65 @@
         rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
         crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
 </head>
 
 <body>
-    <div
-        class="table-responsive">
-        <table
-            class="table table-primary">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Contact</th>
-                    <th scope="col">City</th>
-                    <th scope="col">Gender</th>
 
-                </tr>
-            </thead>
-            <tbody id="tbody">
+    <div class="container">
+        <br><br><br>
+        <h3>All Users Data</h3>
+        <br>
 
-            </tbody>
-        </table>
+        <div
+            class="table-responsive">
+            <table
+                class="table table-primary">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Actions</th>
+
+
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    <?php
+                    $sel = "SELECT * FROM users ";
+                    $data = mysqli_query($conn, $sel);
+                    if ($data->num_rows > 0) {
+                        while ($row = mysqli_fetch_assoc($data)) {
+                            echo "   <tr>
+                                <td> {$row['id']} </td>
+                                <td> {$row['name']}</td>
+                                <td> {$row['email']} </td>
+                                <td> {$row['contact']} </td>
+                                <td>{$row['city']} </td>
+                                <td> {$row['gender']} </td>
+                                <td>
+                                    <button class='btn btn-danger' id='{$row["id"]}'>Delete</button>
+                                    <button class='btn btn-success' id='{$row["id"]}'>Update</button>
+
+                                </td>
+
+                            </tr>";
+                        }
+                    }
+                    ?>
+
+                </tbody>
+            </table>
+        </div>
     </div>
-
     <script src="./jquery-3.7.1.min.js"></script>
     <script>
-        // function showdata() {
-        //     $.ajax({
-        //         url: 'backend.php',
-        //         method: 'POST',
-        //         success: function(data) {
-        //             $('#tbody').html(data)
-        //         }
 
-        //     });
-        // }
-        // showdata();
     </script>
     <!-- Bootstrap JavaScript Libraries -->
     <script
